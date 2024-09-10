@@ -37,10 +37,14 @@ public class Program
                 case "4":
                     employeeManager.SaveFile(); 
                     break;
+                case "5":
+                    break;
+                case "quit":
+                    break;
                 default:
                     Console.WriteLine("Invalid input.");
                     continue;
             }
-        } while (input != "quit" || input == "5");
+        } while (input != "quit" && input != "5");
     }
 }
