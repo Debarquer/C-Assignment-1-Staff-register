@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C# Assignment 1 - Staff register", "C# Assignment 1 - Staff register\C# Assignment 1 - Staff register.csproj", "{4BEE008D-7805-45E4-9A78-ED55563C3332}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffRegister", "C# Assignment 1 - Staff register\StaffRegister.csproj", "{4BEE008D-7805-45E4-9A78-ED55563C3332}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffRegisterTest", "StaffRegisterTest\StaffRegisterTest.csproj", "{1991C44F-24D1-4EFF-A8B5-0A120A406803}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4BEE008D-7805-45E4-9A78-ED55563C3332} = {4BEE008D-7805-45E4-9A78-ED55563C3332}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{4BEE008D-7805-45E4-9A78-ED55563C3332}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BEE008D-7805-45E4-9A78-ED55563C3332}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BEE008D-7805-45E4-9A78-ED55563C3332}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1991C44F-24D1-4EFF-A8B5-0A120A406803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1991C44F-24D1-4EFF-A8B5-0A120A406803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1991C44F-24D1-4EFF-A8B5-0A120A406803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1991C44F-24D1-4EFF-A8B5-0A120A406803}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

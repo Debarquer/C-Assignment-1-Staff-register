@@ -1,8 +1,7 @@
-﻿namespace CAssignment_1Staff_register
+﻿namespace StaffRegister;
+
+public class Employee(string name, int salary)
 {
-    internal class Employee(string name, int salary)
-    {
-        public string Name { get; private set; } = name;
-        public int Salary { get; private set; } = salary;
-    }
+    public string Name { get; private set; } = name;
+    public int Salary { get; private set; } = salary;
 }

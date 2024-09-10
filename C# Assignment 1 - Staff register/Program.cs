@@ -1,17 +1,14 @@
-﻿using CAssignment_1Staff_register;
+﻿using StaffRegister;
 
-internal class Program
+public class Program
 {
-    static List<Employee> employees = new List<Employee>();
-    private static string saveFilePath = "employees.txt";
+    static EmployeeManager employeeManager = new();
 
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
-
-        if(args.Length > 0)
+        if (args.Length > 0)
         {
-            saveFilePath = args[0];
+            employeeManager.SaveFilePath = args[0];
         }
 
         string input = "";
@@ -29,88 +26,21 @@ internal class Program
             switch (input)
             {
                 case "1":
-                    PrintEmployees();
+                    employeeManager.PrintEmployees();
                     break;
                 case "2":
-                    AddEmployee();
+                    employeeManager.AddEmployee();
                     break;
                 case "3":
-                    LoadFile(); 
+                    employeeManager.LoadFile(); 
                     break;
                 case "4":
-                    SaveFile(); 
+                    employeeManager.SaveFile(); 
                     break;
                 default:
                     Console.WriteLine("Invalid input.");
                     continue;
             }
         } while (input != "quit" || input == "5");
-    }
-
-    static void PrintEmployees()
-    {
-        if(employees == null || employees.Count == 0) 
-        {
-            Console.WriteLine("No employees");
-            return;
-        }
-
-        Console.WriteLine("Employees:");
-        for (int i = 0; i < employees.Count; i++)
-        {
-            Employee employee = employees[i];
-            Console.WriteLine($"{i+1} Name: {employee.Name} Salary: {employee.Salary}");
-        }
-    }
-
-    static void AddEmployee()
-    {
-        Console.WriteLine("Enter name: ");
-        string name = Console.ReadLine();
-
-        Console.WriteLine("Enter salary: ");
-        string salary = Console.ReadLine();
-
-        int salaryInt = 0;
-        if(!int.TryParse(salary, out salaryInt))
-        {
-            Console.WriteLine("Invalid number format!");
-            return;
-        }
-        else
-        {
-            employees.Add(new Employee(name, salaryInt));
-            Console.WriteLine($"Added new employee {name} with salary = {salaryInt}");
-        }
-    }
-
-    static void SaveFile()
-    {
-        if (employees == null || employees.Count == 0) return;
-
-        List<string> lines = [];
-        foreach(Employee employee in employees ) 
-        {
-            lines.Add($"{employee.Name}:{employee.Salary}");
-        }
-
-        File.WriteAllLines(saveFilePath, lines);
-    }
-
-    static void LoadFile()
-    {
-        employees.Clear();
-
-        string[] lines = File.ReadAllLines(saveFilePath);
-        foreach (string line in lines)
-        {
-            string[] split = line.Split(":");
-            string name = split[0];
-            int salary = int.Parse(split[1]);
-
-            employees.Add(new Employee(name, salary));
-        }
-
-        Console.WriteLine($"Loaded {lines.Length} employee(s)");
     }
 }
