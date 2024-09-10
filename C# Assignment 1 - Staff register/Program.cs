@@ -1,12 +1,19 @@
 ﻿using CAssignment_1Staff_register;
+using System.Text;
 
 internal class Program
 {
     static List<Employee> employees = new List<Employee>();
+    private static string saveFilePath = "employees.txt";
 
     private static void Main(string[] args)
     {
         Console.WriteLine("Hello, World!");
+
+        if(args.Length > 0)
+        {
+            saveFilePath = args[0];
+        }
 
         string input = "";
         do
@@ -14,7 +21,9 @@ internal class Program
             Console.WriteLine("Menu options:");
             Console.WriteLine("1. Print employees");
             Console.WriteLine("2. Add employee");
-            Console.WriteLine("3. Quit");
+            Console.WriteLine("3. Load from file");
+            Console.WriteLine("4. Save to file");
+            Console.WriteLine("5. Quit");
 
             input = Console.ReadLine();
 
@@ -26,11 +35,17 @@ internal class Program
                 case "2":
                     AddEmployee();
                     break;
+                case "3":
+                    LoadFile(); 
+                    break;
+                case "4":
+                    SaveFile(); 
+                    break;
                 default:
                     Console.WriteLine("Invalid input.");
                     continue;
             }
-        } while (input != "quit" || input == "3");
+        } while (input != "quit" || input == "5");
     }
 
     static void PrintEmployees()
@@ -68,5 +83,35 @@ internal class Program
             employees.Add(new Employee(name, salaryInt));
             Console.WriteLine($"Added new employee {name} with salary = {salaryInt}");
         }
+    }
+
+    static void SaveFile()
+    {
+        if (employees == null || employees.Count == 0) return;
+
+        List<string> lines = [];
+        foreach(Employee employee in employees ) 
+        {
+            lines.Add($"{employee.Name}:{employee.Salary}");
+        }
+
+        File.WriteAllLines(saveFilePath, lines);
+    }
+
+    static void LoadFile()
+    {
+        employees.Clear();
+
+        string[] lines = File.ReadAllLines(saveFilePath);
+        foreach (string line in lines)
+        {
+            string[] split = line.Split(":");
+            string name = split[0];
+            int salary = int.Parse(split[1]);
+
+            employees.Add(new Employee(name, salary));
+        }
+
+        Console.WriteLine($"Loaded {lines.Length} employee(s)");
     }
 }
