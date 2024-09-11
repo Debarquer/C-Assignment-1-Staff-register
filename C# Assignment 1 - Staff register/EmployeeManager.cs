@@ -1,13 +1,19 @@
 ﻿namespace StaffRegister;
 
+/// <summary>
+/// A class for storing and managing a collection of Emloyees.
+/// </summary>
 public class EmployeeManager
 {
-    List<Employee> employees = new List<Employee>();
+    private List<Employee> employees = new List<Employee>();
     public int NrOfEmployees => employees.Count;
     private string saveFilePath = "employees.txt";
 
     public string SaveFilePath { get => saveFilePath; set => saveFilePath = value; }
 
+    /// <summary>
+    /// Prints the employees name, salary to the console.
+    /// </summary>
     public void PrintEmployees()
     {
         if (employees == null || employees.Count == 0)
@@ -24,13 +30,16 @@ public class EmployeeManager
         }
     }
 
+    /// <summary>
+    /// Prompts the user to enter emplyee data and adds a new employee with the entered data.
+    /// </summary>
     public void AddEmployee()
     {
         Console.WriteLine("Enter name: ");
-        string name = Console.ReadLine();
+        string name = Console.ReadLine() ?? "";
 
         Console.WriteLine("Enter salary: ");
-        string salary = Console.ReadLine();
+        string salary = Console.ReadLine() ?? "";
 
         int salaryInt = 0;
         if (!int.TryParse(salary, out salaryInt))
@@ -44,11 +53,19 @@ public class EmployeeManager
             Console.WriteLine($"Added new employee {name} with salary = {salaryInt}");
         }
     }
+    /// <summary>
+    /// Adds a new employee.
+    /// </summary>
+    /// <param name="name">Employee name.</param>
+    /// <param name="salary">Employee salary.</param>
     public void AddEmployee(string name, int salary)
     {
         employees.Add(new Employee(name, salary));
     }
 
+    /// <summary>
+    /// Saves the employee data to the SaveFilePath text file.
+    /// </summary>
     public void SaveFile()
     {
         List<string> lines = [];
@@ -60,6 +77,9 @@ public class EmployeeManager
         File.WriteAllLines(SaveFilePath, lines);
     }
 
+    /// <summary>
+    /// Loads the employee data from the SaveFilePath text file.
+    /// </summary>
     public void LoadFile()
     {
         employees.Clear();

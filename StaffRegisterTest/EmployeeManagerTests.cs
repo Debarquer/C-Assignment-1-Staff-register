@@ -22,7 +22,9 @@ namespace StaffRegisterTest
         {
             EmployeeManager employeeManager = new();
             int nrOfEmloyeesAtStart = employeeManager.NrOfEmployees;
-            employeeManager.AddEmployee("est", 0);
+
+            employeeManager.AddEmployee("test", 0);
+
             Assert.AreEqual(nrOfEmloyeesAtStart + 1, employeeManager.NrOfEmployees);
         }
 
@@ -31,6 +33,7 @@ namespace StaffRegisterTest
         {
             EmployeeManager employeeManager = new();
             employeeManager.SaveFilePath = "";
+
             try
             {
                 employeeManager.LoadFile();
