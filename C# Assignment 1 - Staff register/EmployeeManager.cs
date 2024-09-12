@@ -1,5 +1,5 @@
-﻿using System.Text;
-using System.Xml.Linq;
+﻿using StaffRegister.Helper;
+using System.Text;
 
 namespace StaffRegister;
 
@@ -55,38 +55,12 @@ public class EmployeeManager
     /// </summary>
     public void AddEmployee()
     {
-        Console.WriteLine("Enter name: ");
-        string name = Console.ReadLine() ?? "";
+        string name = Utilities.PromptUserForValidString("Enter name: ");
+        int salary = Utilities.PromptUserForValidNumber("Enter salary: ");
 
-        if (!ContainsOnlyLetters(name))
-        {
-            Console.WriteLine("Invalid name format! Only letters allowed.");
-        }
+        Employee employee = new(name, salary);
 
-        Console.WriteLine("Enter salary: ");
-        string salary = Console.ReadLine() ?? "";
-
-        int salaryInt = 0;
-        if (!int.TryParse(salary, out salaryInt))
-        {
-            Console.WriteLine("Invalid number format!");
-            return;
-        }
-        else
-        {
-            AddEmployee(name, salaryInt);
-            Console.WriteLine($"Added new employee {name} with salary = {salaryInt}");
-        }
-    }
-
-    public bool ContainsOnlyLetters(string s)
-    {
-        foreach (char c in s.ToCharArray())
-        {
-            if(!char.IsLetter(c)) return false;
-        }
-
-        return true;
+        AddEmployee(employee);
     }
 
     /// <summary>
@@ -97,6 +71,16 @@ public class EmployeeManager
     public void AddEmployee(string name, int salary)
     {
         employees.Add(new Employee(name, salary));
+    }
+
+    /// <summary>
+    /// Adds a new employee.
+    /// </summary>
+    /// <param name="name">Employee name.</param>
+    /// <param name="salary">Employee salary.</param>
+    public void AddEmployee(Employee employee)
+    {
+        employees.Add(employee);
     }
 
     /// <summary>
