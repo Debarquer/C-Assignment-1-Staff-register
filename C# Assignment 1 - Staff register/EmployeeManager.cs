@@ -1,4 +1,7 @@
-﻿namespace StaffRegister;
+﻿using System.Text;
+using System.Xml.Linq;
+
+namespace StaffRegister;
 
 /// <summary>
 /// A class for storing and managing a collection of Emloyees.
@@ -26,8 +29,25 @@ public class EmployeeManager
         for (int i = 0; i < employees.Count; i++)
         {
             Employee employee = employees[i];
-            Console.WriteLine($"{i + 1} Name: {employee.Name} Salary: {employee.Salary}");
+            Console.WriteLine($"{i + 1} {employee.ToString()}");
         }
+    }
+
+    /// <summary>
+    /// Returns a string with the format:
+    /// {Employee Id} {employee.ToString()}\n
+    /// </summary>
+    /// <returns></returns>
+    public override string ToString()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < employees.Count; i++)
+        {
+            Employee employee = employees[i];
+            stringBuilder.Append($"{i + 1} {employee.ToString()}\n");
+        }
+
+        return stringBuilder.ToString();
     }
 
     /// <summary>
@@ -37,6 +57,11 @@ public class EmployeeManager
     {
         Console.WriteLine("Enter name: ");
         string name = Console.ReadLine() ?? "";
+
+        if (!ContainsOnlyLetters(name))
+        {
+            Console.WriteLine("Invalid name format! Only letters allowed.");
+        }
 
         Console.WriteLine("Enter salary: ");
         string salary = Console.ReadLine() ?? "";
@@ -53,6 +78,17 @@ public class EmployeeManager
             Console.WriteLine($"Added new employee {name} with salary = {salaryInt}");
         }
     }
+
+    public bool ContainsOnlyLetters(string s)
+    {
+        foreach (char c in s.ToCharArray())
+        {
+            if(!char.IsLetter(c)) return false;
+        }
+
+        return true;
+    }
+
     /// <summary>
     /// Adds a new employee.
     /// </summary>

@@ -11,6 +11,11 @@ public class Program
             employeeManager.SaveFilePath = args[0];
         }
 
+        if(File.Exists(employeeManager.SaveFilePath))
+        {
+            employeeManager.LoadFile();
+        }
+
         string input = "";
         do
         {

@@ -5,6 +5,9 @@ namespace StaffRegisterTest
     [TestClass]
     public class EmployeeManagerTests
     {
+        /// <summary>
+        /// Verifies if calling SaveFile produces a file at SaveFilePath.
+        /// </summary>
         [TestMethod]
         public void TestSaveFile()
         {
@@ -17,6 +20,9 @@ namespace StaffRegisterTest
             Assert.IsTrue(File.Exists(employeeManager.SaveFilePath));
         }
 
+        /// <summary>
+        /// Verifies if calling AddEmployee increments employeeManager.NrOfEmployees.
+        /// </summary>
         [TestMethod]
         public void AddEmployeeTest()
         {
@@ -28,6 +34,9 @@ namespace StaffRegisterTest
             Assert.AreEqual(nrOfEmloyeesAtStart + 1, employeeManager.NrOfEmployees);
         }
 
+        /// <summary>
+        /// Verifies if calling LoadFile on an empty SaveFilePath produces an exception.
+        /// </summary>
         [TestMethod()]
         public void TestLoadFileFail()
         {
@@ -44,6 +53,34 @@ namespace StaffRegisterTest
             }
 
             Assert.Fail("Loading empty file did not throw an exception.");
+        }
+
+        /// <summary>
+        /// Verifies if calling employeeManager.ContainsOnlyLetters on a string containing only letters returns true.
+        /// </summary>
+        [TestMethod()]
+        public void TestOnlyLetters()
+        {
+            EmployeeManager employeeManager = new();
+            string s = "abc";
+
+            bool onlyLetters = employeeManager.ContainsOnlyLetters(s);
+
+            Assert.IsTrue(onlyLetters);
+        }
+
+        /// <summary>
+        /// Verifies if calling employeeManager.ContainsOnlyLetters on a string containing letters and numbers returns false.
+        /// </summary>
+        [TestMethod()]
+        public void TestOnlyLettersFail()
+        {
+            EmployeeManager employeeManager = new();
+            string s = "abc123";
+
+            bool onlyLetters = employeeManager.ContainsOnlyLetters(s);
+
+            Assert.IsFalse(onlyLetters);
         }
     }
 }
