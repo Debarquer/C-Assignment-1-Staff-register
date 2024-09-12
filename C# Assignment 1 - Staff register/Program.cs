@@ -6,7 +6,7 @@ public class Program
     static EmployeeManager employeeManager = new();
     static Menu menu = new();
 
-    private static string[] menuOptions = [
+    private static readonly string[] menuOptions = [
         "Print employees",
         "Add employee",
         "Load from file",
@@ -14,9 +14,9 @@ public class Program
         "Quit"
     ];
 
-    private static Dictionary<string, Action> menuActions = new Dictionary<string, Action>()
+    private static readonly Dictionary<string, Action> menuActions = new Dictionary<string, Action>()
     {
-        {"1", employeeManager.PrintEmployees},
+        { "1", employeeManager.PrintEmployees },
         { "2", employeeManager.AddEmployee },
         { "3", employeeManager.LoadFile },
         { "4", employeeManager.SaveFile },
