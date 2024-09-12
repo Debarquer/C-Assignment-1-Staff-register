@@ -6,21 +6,13 @@ public class Program
     static EmployeeManager employeeManager = new();
     static Menu menu = new();
 
-    private static readonly string[] menuOptions = [
-        "Print employees",
-        "Add employee",
-        "Load from file",
-        "Save to file",
-        "Quit"
+    private static readonly Menu.MenuOption[] menuOptions = [
+        new Menu.MenuOption("1", "Print employees", employeeManager.PrintEmployees),
+        new Menu.MenuOption("2", "Add employee",employeeManager.AddEmployee),
+        new Menu.MenuOption("3", "Load from file",employeeManager.LoadFile),
+        new Menu.MenuOption("4", "Save to file",employeeManager.SaveFile),
+        new Menu.MenuOption("5", "Quit", () => { }),
     ];
-
-    private static readonly Dictionary<string, Action> menuActions = new Dictionary<string, Action>()
-    {
-        { "1", employeeManager.PrintEmployees },
-        { "2", employeeManager.AddEmployee },
-        { "3", employeeManager.LoadFile },
-        { "4", employeeManager.SaveFile },
-    };
 
     private static void Main(string[] args)
     {
@@ -34,6 +26,6 @@ public class Program
             employeeManager.LoadFile();
         }
 
-        menu.ShowMenu(menuOptions, menuActions);
+        menu.ShowMenu(menuOptions);
     }
 }
