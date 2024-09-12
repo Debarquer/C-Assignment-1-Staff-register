@@ -27,7 +27,7 @@
             {
                 PrintMenuOptions(menuOptions);
 
-                input = Console.ReadLine();
+                input = Console.ReadLine().ToLower();
 
                 foreach (MenuOption menuOption in menuOptions)
                 {
@@ -36,15 +36,16 @@
                         menuOption.Action();
                     }
                 }
-            } while (input != "quit" && input != "5");
+            } while (input != "quit");
         }
 
         private static void PrintMenuOptions(MenuOption[] menuOptions)
         {
             Console.WriteLine("Menu options:");
+            Console.WriteLine("Command Name");
             for (int i = 0; i < menuOptions.Length; i++)
             {
-                Console.WriteLine($"{i + 1} {menuOptions[i].Title}");
+                Console.WriteLine($"{menuOptions[i].Input} {menuOptions[i].Title}");
             }
         }
     }
